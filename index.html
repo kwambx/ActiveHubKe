@@ -1,79 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ARSUS GYMFINDER</title>
-  <link rel="stylesheet" href="./CSS/style.css">
-  <style>
-
-  </style>
-</head>
-<body>
-  <header>
-    <h1>ARSUS ACTIVEGYMHUB</h1>
-    <div>
-    <input type="text" id="searchLocation" placeholder="Search by location"> 
-    <button onclick="filterGyms()">Search</button> 
-    <button onclick="showRegister()">Join as Gym Owner</button> 
-  
-  </div>
- </header> 
- <div class="container" id="frontPage"> 
-  <h2>Available Gyms</h2> <div id="gymList">
-  
-  </div> 
-</div> 
-
-<div class="panel" id="registerPage" style="display:none;">
-   <h2>Gym Owner Register/Login</h2> 
-   <input type="text" id="username" placeholder="Username"> 
-   <input type="password" id="password" placeholder="Password"> 
-   <button onclick="register()">Register</button> </br></br>
-   <button onclick="login()">Login</button> 
-  </div>
-  
-  <div class="panel" id="profilePage" style="display:none;">
-     <h2>Create / Edit Gym Profile</h2>
-      <input type="file" id="profilePic" accept="image/*"> 
-      <input type="text" id="gymName" placeholder="Gym Name"> 
-      <input type="text" id="gymLocation" placeholder="Location"> 
-      <input type="text" id="gymAddress" placeholder="Address">
-       <input type="text" id="gymZip" placeholder="Zip Code">
-        <textarea id="gymAmenities" placeholder="Amenities (comma separated)" rows="8"></textarea> 
-        <label>Upload up to 5 pictures:</label>
-       <input type="file" id="gymImages" accept="image/*" multiple> 
-
-      <button onclick="saveProfile()">Save Profile</button>
-    
-    
+  <head>
+    <meta charset="UTF-8" />
+    <title>ARSUS GYMFINDER</title>
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <style></style>
+  </head>
+  <body>
+    <header>
+      <h1>ARSUS ACTIVEGYMHUB</h1>
+      <div>
+        <input
+          type="text"
+          id="searchLocation"
+          placeholder="Search by location"
+        />
+        <button onclick="filterGyms()">Search</button>
+        <button onclick="showRegister()">Join as Gym Owner</button>
+      </div>
+    </header>
+    <div class="container" id="frontPage">
+      <h2>Available Gyms</h2>
+      <div id="gymList"></div>
     </div>
 
+    <div class="panel" id="registerPage" style="display: none">
+      <h2>Gym Owner Register/Login</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="register()">Register</button>
+      <button onclick="login()">Login</button>
+    </div>
 
+    <div class="panel" id="profilePage" style="display: none">
+      <h2>Create / Edit Gym Profile</h2>
+      <input type="file" id="profilePic" accept="image/*" />
+      <input type="text" id="gymName" placeholder="Gym Name" />
+      <input type="text" id="gymLocation" placeholder="Location" />
+      <input type="text" id="gymAddress" placeholder="Address" />
+      <input type="text" id="gymZip" placeholder="Zip Code" />
+      <textarea
+        id="gymAmenities"
+        placeholder="Amenities (comma separated)"
+        rows="8"
+      ></textarea>
+      <label>Upload up to 5 pictures:</label>
+      <input type="file" id="gymImages" accept="image/*" multiple />
 
+      <button onclick="saveProfile()">Save Profile</button>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script src="./JS/app.js"></script>
-</body>
+    <script src="./JS/app.js"></script>
+  </body>
 </html>
