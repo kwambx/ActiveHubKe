@@ -79,7 +79,7 @@ function login() {
   }
 }
 
-// Save gym profile
+
 function saveProfile() {
   const gymName = document.getElementById("gymName").value;
   const gymLocation = document.getElementById("gymLocation").value;
@@ -87,51 +87,85 @@ function saveProfile() {
   const gymZip = document.getElementById("gymZip").value;
   const gymAmenities = document.getElementById("gymAmenities").value;
 
+  const owner = JSON.parse(localStorage.getItem("gymOwner"));
+
+  // Convert profile picture to Base64
   const profilePicInput = document.getElementById("profilePic");
   let profilePic = "";
   if (profilePicInput.files[0]) {
-    profilePic = URL.createObjectURL(profilePicInput.files[0]);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      profilePic = e.target.result; // Base64 string
+      finalizeSave(profilePic);
+    };
+    reader.readAsDataURL(profilePicInput.files[0]);
+  } else {
+    finalizeSave(profilePic);
   }
 
-  const gymImagesInput = document.getElementById("gymImages");
-  let images = [];
-  for (let i = 0; i < Math.min(5, gymImagesInput.files.length); i++) {
-    images.push(URL.createObjectURL(gymImagesInput.files[i]));
+  function finalizeSave(profilePic) {
+    const gymImagesInput = document.getElementById("gymImages");
+    let images = [];
+    let files = Array.from(gymImagesInput.files).slice(0,5);
+    let loaded = 0;
+
+    if (files.length > 0) {
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          images.push(e.target.result); 
+          loaded++;
+          if (loaded === files.length) {
+            saveToStorage(profilePic, images);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    } else {
+      saveToStorage(profilePic, images);
+    }
   }
 
-  const owner = JSON.parse(localStorage.getItem("gymOwner"));
-  const profile = {
-    name: gymName,
-    location: gymLocation,
-    address: gymAddress,
-    zip: gymZip,
-    amenities: gymAmenities,
-    profilePic,
-    images,
-  };
+  function saveToStorage(profilePic, images) {
+    const profile = {
+      name: gymName,
+      location: gymLocation,
+      address: gymAddress,
+      zip: gymZip,
+      amenities: gymAmenities,
+      profilePic,
+      images,
+    };
 
-  // Save profile tied to owner
-  localStorage.setItem("gymProfile_" + owner.username, JSON.stringify(profile));
+    localStorage.setItem("gymProfile_" + owner.username, JSON.stringify(profile));
+    gyms.push(profile);
+    localStorage.setItem("gyms", JSON.stringify(gyms));
 
-  // Update gyms list
-  gyms.push(profile);
-  localStorage.setItem("gyms", JSON.stringify(gyms));
-
-  alert("Profile saved!");
-  document.getElementById("profilePage").style.display = "none";
-  document.getElementById("frontPage").style.display = "block";
-  renderGyms();
+    alert("Profile saved!");
+    document.getElementById("profilePage").style.display = "none";
+    document.getElementById("frontPage").style.display = "block";
+    renderGyms();
+  }
 }
+
+
+
+
+
+
+
+
 
 function filterGyms() {
-  const name = document.getElementById("searchName").value.toLowerCase();
-  const location = document
-    .getElementById("searchLocation")
-    .value.toLowerCase();
-  const filtered = gyms.filter(
-    (gym) =>
-      (!name || gym.name.toLowerCase().includes(name)) &&
-      (!location || gym.location.toLowerCase().includes(location)),
-  );
+  const name = document.getElementById("searchName").value.trim().toLowerCase();
+  const location = document.getElementById("searchLocation").value.trim().toLowerCase();
+
+  const filtered = gyms.filter(gym => {
+    const matchesName = !name || gym.name.toLowerCase().includes(name);
+    const matchesLocation = !location || gym.location.toLowerCase().includes(location);
+    return matchesName && matchesLocation;
+  });
+
   renderGyms(filtered);
 }
+
