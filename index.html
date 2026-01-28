@@ -36,7 +36,7 @@
     <!-- Gym owner profile creation -->
     <div class="panel" id="profilePage" style="display: none">
       <h2>Create / Edit Gym Profile</h2>
-      <input type="file" id="profilePic" accept="image/*" />
+   
       <input type="text" id="gymName" placeholder="Gym Name" />
       <input type="text" id="gymLocation" placeholder="Location" />
       <input type="text" id="gymAddress" placeholder="Address" />
@@ -48,7 +48,50 @@
     
       <br />
       <button onclick="saveProfile()">Save Profile</button>
+      <button type="button" onclick="goToPricing()">need to subscribe</button>
+
     </div>
+
+
+<div id="pricingPage" style="display:none;">
+  <h2>Our Pricing Plans</h2>
+  <p class="pricing-intro">Choose the plan that fits your needs:</p>
+
+  <div class="pricing-cards">
+    <div class="pricing-card" id="basicPlan">
+      <h3>Basic Plan</h3>
+      <p class="price">Ksh.3000<span>/month</span></p>
+      <ul>
+        <li>A two day extension</li>
+        <li>1 free guest pass</li>
+      </ul>
+      <button>Choose Basic</button>
+    </div>
+
+
+    <div class="pricing-card" id="premiumPlan">
+      <h3>Premium Plan</h3>
+    
+      <p class="price">Ksh.10,000 <span>/month</span></p>
+        <p id="para1">save ksh.6000 </p>
+      <ul>
+        <li>All Standard features </li>
+        <li>discounted prices for the package</li>
+        <li>Unlimited guest passes</li>
+      </ul>
+      <button>Choose Premium</button>
+    </div>
+  </div>
+
+  <button type="button" onclick="goHome()">Back to Home</button>
+</div>
+
+
+
+
+
+
+
 
     <!-- Admin login -->
     <div class="panel" id="adminLoginPage" style="display:none;">

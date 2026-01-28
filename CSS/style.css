@@ -42,8 +42,8 @@
    
     .panel {
       background:#e7791fa1; 
-      padding:80px;
-       margin:50px auto;
+      padding:100px;
+      margin:50px auto;
       max-width:500px; 
       border-radius:10px;
       box-shadow:0 4px 10px rgba(0,0,0,0.2);
@@ -58,54 +58,54 @@
     }
 
 
-    .pannel button { 
+     button { 
     padding:10px 20px;
     background:#333; 
     color:#fff; 
     border:none; 
     border-radius:5px; 
     cursor:pointer;
-    width: 100;
+   
  
    
  }
-   .panel button:hover { background:#ea7f21;}
+   button:hover { background:#ea7f21;}
     
 
 
 
-    
-    .gym-card {
-    background:#110f0f; 
-    padding:15px; 
-    margin:10px 0; 
-    border-radius:5px; 
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
- }
     .panel h2 { margin-top:0; text-align:center; }
+
     .panel input, .panel textarea {
       width:100%;
-      padding:10px;
+      padding:20px;
       margin:10px 0;
       border:1px solid #ccc;
       border-radius:5px;
+      background-color: #94e2b4;
 
 
 
     }
     .panel button {
-      width:100%; padding:10px;
-      background:#333;
-       color:#fff;
-        gap: 5em;
-      border:none; border-radius:5px; cursor:pointer;
+      width:50%; 
+      padding:20px;
+      background:#070a07b0;
+      color:#f5eaea;
+      border:none;
+      border-radius:20px;
+      cursor:pointer;
+      margin:5px 0;
+      justify-content: center;
+    
     }
     .panel button:hover { background:#e45b0c;; }
-    .gym-card {
-      background:#fff; padding:15px; margin:10px 0;
-      border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    }
-    .gym-card img { max-width:100px; margin:10px; border-radius:5px; }
+
+ 
+    .gym-card img { max-width:250px;
+       margin:10px;
+       border-radius:5px;
+       }
 
 
     .gym-card {
@@ -136,13 +136,7 @@
 text-decoration:double;
 }
 
-.badge {
-  background: #27ae60;
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.8em;
-}
+
 
 .profile-pic {
   width: 100%;
@@ -155,17 +149,10 @@ text-decoration:double;
 .gallery {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 30px;
   flex-wrap: wrap;
 }
 
-.gallery img {
-  width: 100px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-}
 
 .no-gyms {
   text-align: center;
@@ -173,6 +160,127 @@ text-decoration:double;
   font-style: italic;
   margin-top: 20px;
 }
+
+
+/* Pricing Page Styles */
+#pricingPage {
+  display: none;
+}
+
+
+
+.pricing-container {
+  padding: 40px 20px;
+  text-align: center;
+  color: #333;
+}
+
+.pricing-container h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #13700b;
+}
+
+.pricing-intro {
+  font-style: italic;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; 
+}
+
+.pricing-card {
+  background: #d37319b6;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 60px;
+  width: 280px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+.pricing-card h3 {
+  margin: 0;
+  color: #037947;
+
+}
+
+.price {
+  font-size: 1.8em;
+  margin: 20px 0;
+  color: #2e6303;
+}
+
+.price span {
+  font-size: 0.6em;
+  color: #080505;
+  font-size: x-large;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+  text-align: left;
+}
+
+.pricing-card ul li {
+  margin: 8px 0;
+  padding-left: 15px;
+  position: relative;
+}
+
+.pricing-card ul li::before {
+  content: "✔";
+  color: #27ae60;
+  position: absolute;
+  left: 0;
+}
+
+.pricing-card button {
+  width: 100%;
+  padding: 10px;
+  background: #3d6902;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+
+}
+
+.pricing-card button:hover {
+  background: #e68900;
+}
+#para1{
+  text-decoration: line-through;
+  border: 1px solid #94e2b4;
+  padding: 10px;
+  justify-content: right;
+align-items: center;
+}
+
+/* .badge {
+  background: #c7ab0d;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+} */
+
 
 
 
@@ -206,7 +314,7 @@ text-decoration:double;
   }
 
   .gallery img {
-    width: 80px;
+   max-width: 100px;
     height: 60px;
   }
 }
@@ -236,13 +344,33 @@ text-decoration:double;
   }
 
   .gallery img {
-    width: 70px;
-    height: 50px;
+    width: 90px;
+    height: 70px;
   }
 
   .profile-pic {
     max-height: 150px;
   }
+
+
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pricing-card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+
+
+
+
+
+
+
+
+
 }
 
 

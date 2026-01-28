@@ -12,7 +12,7 @@ function renderGyms(list = gyms)
       <p><strong>Address:</strong> ${gym.address}, ${gym.zip}</p>
        <p><strong>Amenities:</strong> ${gym.amenities}</p> 
        ${gym.profilePic ? `<img class="profile-pic" src="images/${gym.profilePic}" alt="Profile">` : ""} 
-       <div class="gallery"> ${gym.images ? gym.images.map(img => `<img src="images/${img}" alt="Gym">`).join("") : ""} 
+       <div > ${gym.images ? gym.images.map(img => `<img src="images/${img}" alt="Gym">`).join("") : ""} 
        </div> `;
         gymList.appendChild(div); }); 
         if (gymList.innerHTML === "") { gymList.innerHTML = `<p class="no-gyms">No gyms available. 
@@ -61,8 +61,12 @@ document.getElementById("registerPage").style.display = "block";
  }
 
 // Login gym owner
-function login() { const u = document.getElementById("username").value; const p = document.getElementById("password").value; const owner = JSON.parse(localStorage.getItem("gymOwner")); if (owner && owner.username === u && owner.password === p) { localStorage.setItem("activeUser", u); // ✅ track active user const
+function login() { const u = document.getElementById("username").value; 
+const p = document.getElementById("password").value; const owner = JSON.parse(localStorage.getItem("gymOwner")); 
+if (owner && owner.username === u && owner.password === p) 
+{ localStorage.setItem("activeUser", u); 
  existingProfile = JSON.parse(localStorage.getItem("gymProfile_" + u)); 
+
  if (existingProfile) { alert("Login successful! Loading your profile..."); 
   document.getElementById("frontPage").style.display = "none";
    document.getElementById("registerPage").style.display = "none";
@@ -89,6 +93,7 @@ function logout() { alert("Logged out successfully!");
  document.getElementById("profilePage").style.display = "none"; 
  document.getElementById("frontPage").style.display = "block"; }
 // Save gym profilefunction 
+
 function saveProfile() { const gymName = document.getElementById("gymName").value;
    const gymLocation = document.getElementById("gymLocation").value; const gymAddress = document.getElementById("gymAddress").value;
    const gymZip = document.getElementById("gymZip").value;
@@ -97,13 +102,15 @@ function saveProfile() { const gymName = document.getElementById("gymName").valu
    if (!activeUser) { alert("You must be logged in to save a profile!");
      return; 
     }
-const profilePicInput = document.getElementById("profilePic");
-let profilePicName = profilePicInput.files[0] ? profilePicInput.files[0].name : "";
+
+// const profilePicInput = document.getElementById("profilePic");
+// let profilePicName = profilePicInput.files[0] ? profilePicInput.files[0].name : "";
 const gymImagesInput = document.getElementById("gymImages"); let imageNames = [];
 if (gymImagesInput.files.length > 0) { imageNames = Array.from(gymImagesInput.files).slice(0, 5).map(file => file.name); }
-const profile = { name: gymName, location: gymLocation, address: gymAddress, zip: gymZip, amenities: gymAmenities, profilePic: profilePicName, images: imageNames };
+const profile = { name: gymName, location: gymLocation, address: gymAddress, zip: gymZip, amenities: gymAmenities, images: imageNames };
 // Save profile tied to active user
  localStorage.setItem("gymProfile_" + activeUser, JSON.stringify(profile)); 
+
 // // Update gyms list
  gyms = JSON.parse(localStorage.getItem("gyms")) || [];
  gyms = gyms.filter(g => !(g.name === profile.name && g.location === profile.location));
@@ -114,6 +121,25 @@ const profile = { name: gymName, location: gymLocation, address: gymAddress, zip
  
  document.getElementById("frontPage").style.display = "none"; 
  document.getElementById("profilePage").style.display = "block"; }
+
+function goToPricing() {
+  // Hide other sections
+  document.getElementById("frontPage").style.display = "none";
+  document.getElementById("profilePage").style.display = "none";
+  document.getElementById("registerPage").style.display = "none";
+  document.getElementById("adminLoginPage").style.display = "none";
+  document.getElementById("adminPage").style.display = "none";
+
+  // Show pricing page
+  document.getElementById("pricingPage").style.display = "block";
+}
+
+
+
+
+
+
+
 
 
 // Filter gyms by name and location
