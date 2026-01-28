@@ -4,24 +4,27 @@
     <meta charset="UTF-8" />
     <title>ARSUS GYMFINDER</title>
     <link rel="stylesheet" href="./CSS/style.css" />
-    <style></style>
   </head>
   <body>
     <header>
       <h1>ARSUS ACTIVEGYMHUB</h1>
       <div>
-        <input
-          type="text" id="searchLocation"  placeholder="Search by location" />
-          <input type="text" id="searchName" placeholder="Search by name" />
+        <input type="text" id="searchName" placeholder="Search by name" />
+        <input type="text" id="searchLocation" placeholder="Search by location" />
         <button onclick="filterGyms()">Search</button>
+        <button onclick="goHome()">Home</button>
         <button onclick="showRegister()">Join as Gym Owner</button>
+        <button onclick="showAdminLogin()">Admin Login</button>
       </div>
     </header>
+
+    <!-- Main front page -->
     <div class="container" id="frontPage">
       <h2>Available Gyms</h2>
       <div id="gymList"></div>
     </div>
 
+    <!-- Gym owner register/login -->
     <div class="panel" id="registerPage" style="display: none">
       <h2>Gym Owner Register/Login</h2>
       <input type="text" id="username" placeholder="Username" />
@@ -30,6 +33,7 @@
       <button onclick="login()">Login</button>
     </div>
 
+    <!-- Gym owner profile creation -->
     <div class="panel" id="profilePage" style="display: none">
       <h2>Create / Edit Gym Profile</h2>
       <input type="file" id="profilePic" accept="image/*" />
@@ -37,15 +41,27 @@
       <input type="text" id="gymLocation" placeholder="Location" />
       <input type="text" id="gymAddress" placeholder="Address" />
       <input type="text" id="gymZip" placeholder="Zip Code" />
-      <textarea
-        id="gymAmenities"
-        placeholder="Amenities (comma separated)"
-        rows="8"
-      ></textarea>
+      <textarea id="gymAmenities" placeholder="Amenities (comma separated)" rows="8"></textarea>
       <label>Upload up to 5 pictures:</label>
       <input type="file" id="gymImages" accept="image/*" multiple />
-
+      <br />
+    
+      <br />
       <button onclick="saveProfile()">Save Profile</button>
+    </div>
+
+    <!-- Admin login -->
+    <div class="panel" id="adminLoginPage" style="display:none;">
+      <h2>Admin Login</h2>
+      <input type="text" id="adminUsername" placeholder="Admin Username" />
+      <input type="password" id="adminPassword" placeholder="Admin Password" />
+      <button onclick="adminLogin()">Login as Admin</button>
+    </div>
+
+    <!-- Admin dashboard -->
+    <div class="container" id="adminPage" style="display:none;">
+      <h2>Admin Dashboard  Manage Gym Profiles</h2>
+      <div id="adminGymList"></div>
     </div>
 
     <script src="./JS/app.js"></script>

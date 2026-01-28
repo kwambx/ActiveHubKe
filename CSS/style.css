@@ -8,47 +8,72 @@
       background-attachment: fixed;
     }
     header {
-      background:#333; color:#fff;
-      padding:15px;
+      background:#046113; color:#fff;
+      padding:30px;
       display:flex;
      justify-content:space-between;
      align-items:center;
     }
     h1 { margin:0; }
-    .header-right { display:flex; gap:10px; align-items:center; }
-    .header-right input { padding:8px; border-radius:5px; border:1px solid #ccc; }
+
+    .header-right { 
+      display:flex;
+      gap:10px;
+      align-items:center;
+     }
+
+    .header-right input { 
+      padding:8px;
+      border-radius:5px;
+      border:1px solid #ccc;
+     }
+
     .header-right button {
-      padding:8px 15px; background:#ff9800; color:#fff;
-      border:none; border-radius:5px; cursor:pointer;
+      padding:8px 15px;
+      background:#ff9800;
+      color:#fff;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
     }
     .header-right button:hover { background:#e68900; }
+
     .container { padding:20px; }
    
     .panel {
-      background:#037947; padding:80px; margin:40px auto;
-      max-width:500px; border-radius:10px;
+      background:#e7791fa1; 
+      padding:80px;
+       margin:50px auto;
+      max-width:500px; 
+      border-radius:10px;
       box-shadow:0 4px 10px rgba(0,0,0,0.2);
 
     }
 
 
      .search-bar input {
-      padding:50px;
-      border-radius:10px;
+      padding:80px;
+      border-radius:30px;
       border:1px solid #ccc;
     }
 
 
-    button { 
+    .pannel button { 
     padding:10px 20px;
     background:#333; 
     color:#fff; 
     border:none; 
     border-radius:5px; 
     cursor:pointer;
+    width: 100;
+ 
    
  }
-    button:hover { background:#ea7f21;}
+   .panel button:hover { background:#ea7f21;}
+    
+
+
+
     
     .gym-card {
     background:#110f0f; 
@@ -59,8 +84,14 @@
  }
     .panel h2 { margin-top:0; text-align:center; }
     .panel input, .panel textarea {
-      width:100%; padding:10px; margin:10px 0;
-      border:1px solid #ccc; border-radius:5px;
+      width:100%;
+      padding:10px;
+      margin:10px 0;
+      border:1px solid #ccc;
+      border-radius:5px;
+
+
+
     }
     .panel button {
       width:100%; padding:10px;
@@ -75,5 +106,144 @@
       border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.1);
     }
     .gym-card img { max-width:100px; margin:10px; border-radius:5px; }
+
+
+    .gym-card {
+  background: #df6c3f9a;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 20px;
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+
+.gym-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  width: 85%;
+}
+
+.gym-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gym-header h3 {
+  margin: 0;
+  color: #13700b;
+text-decoration:double;
+}
+
+.badge {
+  background: #27ae60;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+}
+
+.profile-pic {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.gallery {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.gallery img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.no-gyms {
+  text-align: center;
+  color: #e91818;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+
+
+
+
+
+/* Tablet screens */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+  }
+
+  .header-right {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .panel {
+    padding: 20px;
+    margin: 10px;
+    width: 95%;
+  }
+
+  .gym-card {
+    margin: 10px;
+    padding: 15px;
+    width: 95%;
+  }
+
+  .gallery img {
+    width: 80px;
+    height: 60px;
+  }
+}
+
+/* Phone screens */
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .header-right input,
+  .header-right button {
+    width: 100%;   /* ✅ stack inputs/buttons full width */
+    margin: 5px 0;
+  }
+
+  .panel {
+    padding: 15px;
+    width: 90%;
+  }
+
+  .gym-card {
+    margin: 5px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .gallery img {
+    width: 70px;
+    height: 50px;
+  }
+
+  .profile-pic {
+    max-height: 150px;
+  }
+}
+
 
        

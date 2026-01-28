@@ -1,36 +1,49 @@
 // Initial gyms
-let gyms = JSON.parse(localStorage.getItem("gyms")) || [
-  {
-    name: "Gold's Gym",
-    location: "Nairobi",
-    address: "CBD",
-    zip: "00100",
-    amenities: "Weights, Cardio",
-    images: [],
-  },
-];
+let gyms = JSON.parse(localStorage.getItem("gyms")) || [];
+function renderGyms(list = gyms) 
+{ const gymList = document.getElementById("gymList"); gymList.innerHTML = "";
+   list.forEach((gym) => { const div = document.createElement("div");
+     div.className = "gym-card"; 
+     div.innerHTML = ` <div
+      class="gym-header">
+      <h3>${gym.name}</h3>
+       </div>
+       <p><strong>Location:</strong> ${gym.location}</p> 
+      <p><strong>Address:</strong> ${gym.address}, ${gym.zip}</p>
+       <p><strong>Amenities:</strong> ${gym.amenities}</p> 
+       ${gym.profilePic ? `<img class="profile-pic" src="images/${gym.profilePic}" alt="Profile">` : ""} 
+       <div class="gallery"> ${gym.images ? gym.images.map(img => `<img src="images/${img}" alt="Gym">`).join("") : ""} 
+       </div> `;
+        gymList.appendChild(div); }); 
+        if (gymList.innerHTML === "") { gymList.innerHTML = `<p class="no-gyms">No gyms available. 
+          Please create a profile.</p>`; } } 
+          
+          renderGyms();
 
-function renderGyms(list = gyms) {
-  const gymList = document.getElementById("gymList");
-  gymList.innerHTML = "";
-  list.forEach((gym) => {
-    const div = document.createElement("div");
-    div.className = "gym-card";
-    div.innerHTML = `<h3>${gym.name}</h3>
-          <p>${gym.location}, ${gym.address}, ${gym.zip}</p>
-          <p>Amenities: ${gym.amenities}</p>`;
-    if (gym.profilePic) {
-      div.innerHTML += `<img src="${gym.profilePic}" alt="Profile">`;
+// Admin dashboard rendering (shows all gyms + delete)
+function renderAdminGyms() { const adminGymList = document.getElementById("adminGymList");
+   adminGymList.innerHTML = "";
+    gyms.forEach((gym, index) => { const div = document.createElement("div"); 
+      div.className = "gym-card";
+       div.innerHTML = ` <h3>${gym.name}</h3>
+        <p>${gym.location}, ${gym.address}, ${gym.zip}</p>
+         <p>Amenities: ${gym.amenities}</p> 
+         ${gym.profilePic ? `<img src="images/${gym.profilePic}" alt="Profile">` : ""} 
+         ${gym.images ? gym.images.map(img => `<img src="images/${img}" alt="Gym">`).join("") : ""} 
+         <button onclick="deleteGym(${index})">Delete Profile</button> `;
+         
+         adminGymList.appendChild(div); });
+        
+        }
+
+// Delete gym profile (admin only)
+function deleteGym(index) { if (confirm("Are you sure you want to delete this gym profile?")) 
+  { gyms.splice(index, 1);
+     localStorage.setItem("gyms", JSON.stringify(gyms)); 
+     renderAdminGyms(); renderGyms();
+      alert("Gym profile deleted!"); } 
     }
-    if (gym.images) {
-      gym.images.forEach((img) => {
-        div.innerHTML += `<img src="${img}" alt="Gym">`;
-      });
-    }
-    gymList.appendChild(div);
-  });
-}
-renderGyms();
+
 
 // Show register page
 function showRegister() {
@@ -39,125 +52,73 @@ function showRegister() {
 }
 
 // Register gym owner
-function register() {
-  const u = document.getElementById("username").value;
-  const p = document.getElementById("password").value;
-  if (!u || !p) {
-    alert("Fill all fields");
-    return;
-  }
-  localStorage.setItem(
-    "gymOwner",
-    JSON.stringify({ username: u, password: p }),
-  );
-  alert("Registered! Please login.");
-}
+function register() { const u = document.getElementById("username").value; const p = document.getElementById("password").value; 
+  if (!u || !p) { alert("Fill all fields"); return; } 
+  localStorage.setItem("gymOwner", JSON.stringify({ username: u, password: p }));
+   alert("Registration successful! Please log in."); 
+document.getElementById("frontPage").style.display = "none"; 
+document.getElementById("registerPage").style.display = "block";
+ }
 
 // Login gym owner
-function login() {
-  const u = document.getElementById("username").value;
-  const p = document.getElementById("password").value;
-  const owner = JSON.parse(localStorage.getItem("gymOwner"));
-  if (owner && owner.username === u && owner.password === p) {
-    document.getElementById("registerPage").style.display = "none";
-    document.getElementById("profilePage").style.display = "block";
+function login() { const u = document.getElementById("username").value; const p = document.getElementById("password").value; const owner = JSON.parse(localStorage.getItem("gymOwner")); if (owner && owner.username === u && owner.password === p) { localStorage.setItem("activeUser", u); // ✅ track active user const
+ existingProfile = JSON.parse(localStorage.getItem("gymProfile_" + u)); 
+ if (existingProfile) { alert("Login successful! Loading your profile..."); 
+  document.getElementById("frontPage").style.display = "none";
+   document.getElementById("registerPage").style.display = "none";
+    document.getElementById("profilePage").style.display = "block"; 
+    document.getElementById("gymName").value = existingProfile.name; 
+    document.getElementById("gymLocation").value = existingProfile.location; 
+    document.getElementById("gymAddress").value = existingProfile.address; 
+    document.getElementById("gymZip").value = existingProfile.zip;
+     document.getElementById("gymAmenities").value = existingProfile.amenities; } 
 
-    // Check if profile exists
-    const existingProfile = JSON.parse(localStorage.getItem("gymProfile_" + u));
-    if (existingProfile) {
-      document.getElementById("gymName").value = existingProfile.name;
-      document.getElementById("gymLocation").value = existingProfile.location;
-      document.getElementById("gymAddress").value = existingProfile.address;
-      document.getElementById("gymZip").value = existingProfile.zip;
-      document.getElementById("gymAmenities").value = existingProfile.amenities;
-      alert("Welcome back! You can edit your gym profile.");
-    } else {
-      alert("Login successful! Please create your gym profile.");
+        else { alert("Login successful! Please create your gym profile."); 
+      document.getElementById("frontPage").style.display = "none"; 
+      document.getElementById("registerPage").style.display = "none";
+       document.getElementById("profilePage").style.display = "block"; } } 
+       else { alert("Invalid credentials");
+
+        } 
+      }
+
+
+// Logout gym owner
+function logout() { alert("Logged out successfully!"); 
+  localStorage.removeItem("activeUser");
+ document.getElementById("profilePage").style.display = "none"; 
+ document.getElementById("frontPage").style.display = "block"; }
+// Save gym profilefunction 
+function saveProfile() { const gymName = document.getElementById("gymName").value;
+   const gymLocation = document.getElementById("gymLocation").value; const gymAddress = document.getElementById("gymAddress").value;
+   const gymZip = document.getElementById("gymZip").value;
+   const gymAmenities = document.getElementById("gymAmenities").value;
+   const activeUser = localStorage.getItem("activeUser");
+   if (!activeUser) { alert("You must be logged in to save a profile!");
+     return; 
     }
-  } else {
-    alert("Invalid credentials");
-  }
-}
+const profilePicInput = document.getElementById("profilePic");
+let profilePicName = profilePicInput.files[0] ? profilePicInput.files[0].name : "";
+const gymImagesInput = document.getElementById("gymImages"); let imageNames = [];
+if (gymImagesInput.files.length > 0) { imageNames = Array.from(gymImagesInput.files).slice(0, 5).map(file => file.name); }
+const profile = { name: gymName, location: gymLocation, address: gymAddress, zip: gymZip, amenities: gymAmenities, profilePic: profilePicName, images: imageNames };
+// Save profile tied to active user
+ localStorage.setItem("gymProfile_" + activeUser, JSON.stringify(profile)); 
+// // Update gyms list
+ gyms = JSON.parse(localStorage.getItem("gyms")) || [];
+ gyms = gyms.filter(g => !(g.name === profile.name && g.location === profile.location));
+ gyms.push(profile); localStorage.setItem("gyms", JSON.stringify(gyms)); 
+ alert("Profile saved successfully!");
+  renderGyms();
+   renderAdminGyms(); 
+ 
+ document.getElementById("frontPage").style.display = "none"; 
+ document.getElementById("profilePage").style.display = "block"; }
 
 
-function saveProfile() {
-  const gymName = document.getElementById("gymName").value;
-  const gymLocation = document.getElementById("gymLocation").value;
-  const gymAddress = document.getElementById("gymAddress").value;
-  const gymZip = document.getElementById("gymZip").value;
-  const gymAmenities = document.getElementById("gymAmenities").value;
-
-  const owner = JSON.parse(localStorage.getItem("gymOwner"));
-
-  // Convert profile picture to Base64
-  const profilePicInput = document.getElementById("profilePic");
-  let profilePic = "";
-  if (profilePicInput.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      profilePic = e.target.result; // Base64 string
-      finalizeSave(profilePic);
-    };
-    reader.readAsDataURL(profilePicInput.files[0]);
-  } else {
-    finalizeSave(profilePic);
-  }
-
-  function finalizeSave(profilePic) {
-    const gymImagesInput = document.getElementById("gymImages");
-    let images = [];
-    let files = Array.from(gymImagesInput.files).slice(0,5);
-    let loaded = 0;
-
-    if (files.length > 0) {
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          images.push(e.target.result); 
-          loaded++;
-          if (loaded === files.length) {
-            saveToStorage(profilePic, images);
-          }
-        };
-        reader.readAsDataURL(file);
-      });
-    } else {
-      saveToStorage(profilePic, images);
-    }
-  }
-
-  function saveToStorage(profilePic, images) {
-    const profile = {
-      name: gymName,
-      location: gymLocation,
-      address: gymAddress,
-      zip: gymZip,
-      amenities: gymAmenities,
-      profilePic,
-      images,
-    };
-
-    localStorage.setItem("gymProfile_" + owner.username, JSON.stringify(profile));
-    gyms.push(profile);
-    localStorage.setItem("gyms", JSON.stringify(gyms));
-
-    alert("Profile saved!");
-    document.getElementById("profilePage").style.display = "none";
-    document.getElementById("frontPage").style.display = "block";
-    renderGyms();
-  }
-}
-
-
-
-
-
-
-
-
-
+// Filter gyms by name and location
 function filterGyms() {
-  const name = document.getElementById("searchName").value.trim().toLowerCase();
+  const name = document.getElementById("searchName")?.value.trim().toLowerCase() || "";
   const location = document.getElementById("searchLocation").value.trim().toLowerCase();
 
   const filtered = gyms.filter(gym => {
@@ -169,3 +130,49 @@ function filterGyms() {
   renderGyms(filtered);
 }
 
+function goHome() {
+  // Hide all other sections
+  document.getElementById("profilePage").style.display = "none";
+  document.getElementById("registerPage").style.display = "none";
+  document.getElementById("adminLoginPage").style.display = "none";
+  document.getElementById("adminPage").style.display = "none";
+
+  // Show the front page
+  document.getElementById("frontPage").style.display = "block";
+}
+
+
+
+
+
+
+
+// Admin login
+function showAdminLogin() {
+  // Hide front page and register/login page
+  document.getElementById("frontPage").style.display = "none";
+  document.getElementById("registerPage").style.display = "none";
+
+  // Show admin login page
+  document.getElementById("adminLoginPage").style.display = "block";
+}
+
+function adminLogin() {
+  const u = document.getElementById("adminUsername").value;
+  const p = document.getElementById("adminPassword").value;
+
+  if (u === "admin" && p === "admin123") {
+    alert("Admin login successful!");
+
+    // Hide login/register and front page
+    document.getElementById("frontPage").style.display = "none";
+    document.getElementById("registerPage").style.display = "none";
+    document.getElementById("adminLoginPage").style.display = "none";
+
+    // Show admin dashboard
+    document.getElementById("adminPage").style.display = "block";
+    renderAdminGyms();
+  } else {
+    alert("Invalid admin credentials");
+  }
+}
