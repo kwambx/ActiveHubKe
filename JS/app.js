@@ -20,6 +20,10 @@ function renderGyms(list = gyms)
           
           renderGyms();
 
+
+
+          
+
 // Admin dashboard rendering (shows all gyms + delete)
 function renderAdminGyms() { const adminGymList = document.getElementById("adminGymList");
    adminGymList.innerHTML = "";
@@ -179,6 +183,7 @@ function showAdminLogin() {
   document.getElementById("frontPage").style.display = "none";
   document.getElementById("registerPage").style.display = "none";
 
+
   // Show admin login page
   document.getElementById("adminLoginPage").style.display = "block";
 }
@@ -194,6 +199,7 @@ function adminLogin() {
     document.getElementById("frontPage").style.display = "none";
     document.getElementById("registerPage").style.display = "none";
     document.getElementById("adminLoginPage").style.display = "none";
+        document.getElementById("aboutPage").style.display = "none";
 
     // Show admin dashboard
     document.getElementById("adminPage").style.display = "block";
