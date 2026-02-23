@@ -169,6 +169,7 @@ text-decoration:double;
 /* Pricing Page Styles */
 #pricingPage {
   display: none;
+  color: #ff9800;
 }
 
 
@@ -188,7 +189,7 @@ text-decoration:double;
 .pricing-intro {
   font-style: italic;
   margin-bottom: 30px;
-  color: #555;
+  color: #ff9800;
 }
 
 .pricing-cards {
@@ -206,6 +207,7 @@ text-decoration:double;
   width: 280px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
+  color: #080505;
 }
 
 .pricing-card:hover {
@@ -302,6 +304,7 @@ p{
 .abt{
   display: flex;
   width: 100%;
+  line-height: 40px;
   align-items: center;
 justify-content: center;
 }
@@ -319,11 +322,11 @@ flex: 1;
  animation :slider 15s linear infinite;
 }
 @keyframes slider {
-  0%{background-image:url(/images/trainer.jpg);}
-  25%{background-image:url(/images/lady1.jpg);}
-  50%{background-image:url(/images/lady2.jpg);}
-  75%{background-image:url(/images/cardio\ 3.jpg);}
-  100%{background-image:url(/images/cardio\ 1.jpg);}
+  0%{background-image:url('/images/trainer.jpg');}
+  25%{background-image:url('/images/lady1.jpg');}
+  50%{background-image:url('/images/lady2.jpg');}
+  75%{background-image:url('/images/cardio\ 3.jpg');}
+  100%{background-image:url('/images/cardio\ 1.jpg');}
 }
 
 /*footer*/
