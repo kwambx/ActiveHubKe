@@ -2,7 +2,7 @@
       font-family: Arial, sans-serif;
       margin:0;
        padding:0;
-      background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.9)),url('/images/background1.jpg') ;
+      background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.6)),url('/images/background1.jpg') ;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -283,6 +283,8 @@ align-items: center;
   background-color: #78817c23;
 padding-right: 30px;
 color: #ff9800;
+flex: 1;
+
 
 }
 .about h3{
@@ -300,10 +302,28 @@ p{
 .abt{
   display: flex;
   width: 100%;
+  align-items: center;
+justify-content: center;
 }
 
 .abt img{
 width: 100%;
+}
+.image{
+flex: 1;
+  margin: 6rem 12rem;
+  height: 50rem;
+ width: 100%;
+ background-size: 100% 100%;
+ box-shadow: 20px 20px 10px gray;
+ animation :slider 15s linear infinite;
+}
+@keyframes slider {
+  0%{background-image:url(/images/trainer.jpg);}
+  25%{background-image:url(/images/lady1.jpg);}
+  50%{background-image:url(/images/lady2.jpg);}
+  75%{background-image:url(/images/cardio\ 3.jpg);}
+  100%{background-image:url(/images/cardio\ 1.jpg);}
 }
 
 /*footer*/
