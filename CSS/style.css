@@ -2,7 +2,7 @@
       font-family: Arial, sans-serif;
       margin:0;
        padding:0;
-      background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.6)),url('/images/background1.jpg') ;
+      background:linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.6)),url('images/background1.jpg') ;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -322,11 +322,11 @@ flex: 1;
  animation :slider 15s linear infinite;
 }
 @keyframes slider {
-  0%{background-image:url('/images/trainer.jpg');}
-  25%{background-image:url('/images/lady1.jpg');}
-  50%{background-image:url('/images/lady2.jpg');}
-  75%{background-image:url('/images/cardio\ 3.jpg');}
-  100%{background-image:url('/images/cardio\ 1.jpg');}
+  0%{background-image:url('https://raw.githubusercontent.com/kwambx/ActiveHubKe/refs/heads/master/images/lady2.jpg');}
+  25%{background-image:url('https://raw.githubusercontent.com/kwambx/ActiveHubKe/refs/heads/master/images/lady1.jpg');}
+  50%{background-image:url('https://raw.githubusercontent.com/kwambx/ActiveHubKe/refs/heads/master/images/cardio 1.jpg');}
+  75%{background-image:url('https://raw.githubusercontent.com/kwambx/ActiveHubKe/refs/heads/master/images/cardio 2.jpg');}
+  100%{background-image:url('https://raw.githubusercontent.com/kwambx/ActiveHubKe/refs/heads/master/images/trainer.jpg');}
 }
 
 /*footer*/
